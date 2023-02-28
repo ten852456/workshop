@@ -26,7 +26,7 @@ app.use(compression({
 app.get('/', (req, res) => {
     const animal = `elephent`
     res.type('text/plain')
-    res.send(animal)
+    res.send(animal.repeat(1000))
 })
 
 app.get('/about', (req, res) => {

@@ -1,0 +1,39 @@
+<header class="header sticky sticky--top js-header" style="z-index:100">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="">
+      <span class="brand-line brand-line-1" style="margin-top: 0.1rem;">&nbsp;&nbsp;Rent a Wedding Dress</span>
+    </a>
+    <ul class="nav-main">
+      <a style="margin: 20px; color: white;" href="">Home</a>
+      <a style="margin: 20px; color: white;" href="">About</a>
+      <a style="margin: 20px; color: white;" href="">Contact</a>
+      <a title="Admin" href="" class="float-right link-light" routerLink="Adminview"
+        style="float:right; padding: 0px; height: 0px;">
+        <fa-icon [icon]="faUsersCog" size="2x"></fa-icon>
+        Admin view
+      </a>
+    </ul>
+  </div>
+</header>
+<div class='container'>
+  <section class="section-hero" style="border-radius: 10px;">
+    <div class="row">
+      <div class="col-md-8 col-12 hero-content text-left" style="padding-left: 30px;">
+        <div class="hero-title" style="padding-bottom: 25px;">บริการให้ชุดแต่งงานที่ดีที่สุด</div>
+        <div class="hero-sub-title">เราช่วยคุณหาชุดแต่งงานได้ง่าย</div>
+        <div class="text-left d-none d-sm-block " style="padding-top: 20px; padding-left: 10px; color: #fff;">
+          <ul class="hero-list list-unstyled">
+            <li><i class="fas fa-check text-primary"></i>&nbsp;&#x2609;&nbsp;ชุดแต่งงานมีการตรวจสอบความเรียบร้อย
+            </li>
+            <li><i class="fas fa-check text-primary"></i>&nbsp;&#x2609;&nbsp;ชุดแต่งงานมีการตรวจสอบความถูกต้อง
+            </li>
+            <li><i class="fas fa-check text-primary"></i>&nbsp;&#x2609;&nbsp;บริการ เช่า
+              รายคร้ัง / รายชั่วโมง / รายวัน / รายเดือน
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <router-outlet></router-outlet>
+</div>

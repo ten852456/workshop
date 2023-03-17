@@ -71,6 +71,18 @@ app.put('/dresses/:id', (req, res) => {
   res.send(dress);
 });
 
+//UPDATE RentalDate by id
+app.put('/dresses/:id/rentaldate', (req, res) => {
+  const dress = dresses.find((d) => d.id === parseInt(req.params.id));
+  if (!dress) res.status(404).send('Dress not found');
+
+  dress.rentalDate = req.body.rentalDate;
+
+  res.send(dress);
+});
+
+
+
 //DELETE
 app.delete('/dresses/:id', (req, res) => {
   const dressIndex = dresses.findIndex((d) => d.id === parseInt(req.params.id));

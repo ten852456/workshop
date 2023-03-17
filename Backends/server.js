@@ -22,63 +22,53 @@ app.use(compression({
     threshold: 0
 }));
 
-const products = [
-    {
-      id: '1001',
-      name: 'Node.js for Beginners',
-      category: 'Node',
-      price: 990
-    },
-    {
-      id: '1002',
-      name: 'React 101',
-      category: 'React',
-      price: 3990
-    },
-    {
-      id: '1003',
-      name: 'Getting started with MongoDB',
-      category: 'MongoDB',
-      price: 1990
-    }
-  ];
+let dresses = [
+  { id: 1, type: 'A-line', rentalDate: '2023-03-20' },
+  { id: 2, type: 'Ball Gown', rentalDate: '2023-04-02' },
+  { id: 3, type: 'Mermaid', rentalDate: '2023-03-25' },
+];
   
-  app.get('/products', (req, res) => {
-    res.json(products);
-  });
-  
-  app.get('/products/:id', (req, res) => {
-    const { id } = req.params;
-    const result = products.find((product) => product.id === id);
-    res.json(result);
-  });
-  
-  app.post('/products', (req, res) => {
-    const payload = req.body;
-    res.json(payload);
-  });
-  
-  app.put('/products/:id', (req, res) => {
-    const { id } = req.params;
-    res.json({ id });
-  });
-  
-  app.delete('/products/:id', (req, res) => {
-    const { id } = req.params;
-    res.json({ id });
-  });
-  
+app.get('/dresses', (req, res) => {
+  res.send(dresses);
+});
 
-app.get('/', (req, res) => {
-    const animal = `elephent`
-    res.type('text/plain')
-    res.json({"admin" : "tete"})
-})
+  
+app.get('/dresses/:id', (req, res) => {
+  const dress = dresses.find((d) => d.id === parseInt(req.params.id));
+  if (!dress) res.status(404).send('Dress not found');
+  res.send(dress);
+});
 
-app.get('/about', (req, res) => {
-    res.type('text/plain')
-    res.send('Server about')
-})
+  
+app.post('/dresses', (req, res) => {
+  const dress = {
+    id: dresses.length + 1,
+    type: req.body.type,
+    rentalDate: req.body.rentalDate
+  };
+  dresses.push(dress);
+  res.send(dress);
+});
+app.put('/dresses/:id', (req, res) => {
+  const dress = dresses.find((d) => d.id === parseInt(req.params.id));
+  if (!dress) res.status(404).send('Dress not found');
+
+  dress.type = req.body.type || dress.type;
+  dress.rentalDate = req.body.rentalDate || dress.rentalDate;
+
+  res.send(dress);
+});
+
+app.delete('/dresses/:id', (req, res) => {
+  const dressIndex = dresses.findIndex((d) => d.id === parseInt(req.params.id));
+  if (dressIndex === -1) res.status(404).send('Dress not found');
+
+  dresses.splice(dressIndex, 1);
+  res.send('Dress deleted');
+});
+
+
+
 
 app.use((req, res) => {
     res.type('text/plain')

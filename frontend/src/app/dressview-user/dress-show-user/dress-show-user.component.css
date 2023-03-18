@@ -271,5 +271,6 @@ footer {
 #feedback a:hover {
 	background:#acc1c7;
 }
-
-	
+.ui-dialog {
+    background-color: #000;
+} 

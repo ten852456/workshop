@@ -16,6 +16,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import { MatSliderModule } from '@angular/material/slider';
+import { SharedService } from './shared.service';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { MatSliderModule } from '@angular/material/slider';
     FontAwesomeModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

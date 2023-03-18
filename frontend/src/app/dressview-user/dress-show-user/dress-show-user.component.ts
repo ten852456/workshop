@@ -11,99 +11,71 @@ declare var $: any;
 })
 export class DressShowUserComponent {
 
-  // displayModal: boolean = false;
-  // displayRentModal: boolean = false;
+  displayModal: boolean = false;
+  displayRentModal: boolean = false;
 
-  // faPlusCircle = faPlusCircle;
-  // faSearch = faSearch;
+  faPlusCircle = faPlusCircle;
+  faSearch = faSearch;
 
-  // constructor(private service:SharedService) { }
+  constructor(private service:SharedService) { }
 
-  // Bookviewlist:any=[];
+  DressViewList:any=[];
 
-  // Book:any=[];
+  Dress:any=[];
 
-  // Rent_name!: string;
-  // Rent_call!: string;
-  // Rent_email!: string;
+  RentName!: string;
+  RentCalNum!: string;
+  RentEmail!: string;
 
-  // ModalTitle: string | undefined;
-  // ActivateAddEditBook:boolean = false;
-  // book:any;
+  ModalTitle: string | undefined;
+  ActivateAddEditBook:boolean = false;
+  dress:any;
 
-  // BookIdFiltered:string="";
-  // BookNameFiltered:string="";
-  // BooklistwithoutFiltered:any=[];
-
-
-  // ngOnInit(): void {
-  //   this.refreshBooklist();
-  // }
-  // sendrentbook(item:any){
-  //   this.displayRentModal = false;
-  //   this.Book = item;
-  // }
-  // rentbook(item:any){
-  //   this.displayModal = false;
-  //   this.displayRentModal = true;
-  //   this.Book = item;
-  // }
-  // showModalDialog() {
-  //   this.displayModal = true;
-  // }
-  // showdata(item:any){
-  //   this.Book = item;
-  //   this.displayModal = true;
-
-  // }
-
-  // addClick(){
-  //   this.book={
-  //     id:0,
-  //     Bookname:""
-  //   }
-  //   this.ModalTitle="Add Book";
-  //   this.ActivateAddEditBook=true;
-  // }
-  // editClick(item: any){
-  //   this.book=item;
-  //   this.ModalTitle="Edit Book"
-  //   this.ActivateAddEditBook=true;
-  // }
+  DressIDFiltered:string="";
+  DressTypeFiltered:string="";
+  DressListWithoutFiltered:any=[];
 
 
-  // closeClick(){
-  //   this.ActivateAddEditBook=false;
-  //   this.refreshBooklist;
-  // }
+  ngOnInit(): void {
+    this.RefreshDressList();
+  }
+  SendRentalDress(item:any){
+    this.displayRentModal = false;
+    this.Dress = item;
+  }
+  RentDress(item:any){
+    this.displayModal = false;
+    this.displayRentModal = true;
+    this.Dress = item;
+  }
+  ShowModalDialog() {
+    this.displayModal = true;
+  }
+  ShowData(item:any){
+    this.Dress = item;
+    this.displayModal = true;
 
-  // refreshBooklist(){
-  //   this.service.getBooklist().subscribe(data=>{
-  //     this.Bookviewlist = data;
-  //     this.BooklistwithoutFiltered=data;
-  //   });
-  // }
+  }
 
-  // deleteClick(item: any){
-  //   if(confirm('Are you sure??')){
-  //     this.service.deleteBooklist(item.id).subscribe(data=>{
-  //       alert(data.toString());
-  //       this.refreshBooklist();
-  //     })
-  //   }
-  // }
-  // filterfn(){
-  //   var bookIdFilter = this.BookIdFiltered;
-  //   var bookNameFilter = this.BookNameFiltered;
+  RefreshDressList(){
+    this.service.getDresses().subscribe(data=>{
+      this.DressViewList = data;
+      this.DressListWithoutFiltered=data;
+    });
+  }
 
-  //   this.Bookviewlist = this.BooklistwithoutFiltered.filter(function (el: { id: { toString: () => string; }; bookname: { toString: () => string; }; }){
-  //     return el.id.toString().toLowerCase().includes(
-  //       bookIdFilter.toString().trim().toLowerCase()
-  //     )&&
-  //     el.bookname.toString().toLowerCase().includes(
-  //       bookNameFilter.toString().trim().toLowerCase()
-  //     )
-  //   })
-  // }
+  Filtered(){
+    var DressIDFilter = this.DressIDFiltered;
+    var DressTypeFilter = this.DressTypeFiltered;
+
+    this.DressViewList = this.DressListWithoutFiltered.filter(function (el: { id: { toString: () => string; }; type: { toString: () => string; }; }){
+      return el.id.toString().toLowerCase().includes(
+        DressIDFilter.toString().trim().toLowerCase()
+      )&&
+      el.type.toString().toLowerCase().includes(
+        DressTypeFilter.toString().trim().toLowerCase()
+      )
+    })
+  }
 
 }

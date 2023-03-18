@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8000
 
 app.use(cors());
 
@@ -23,9 +23,15 @@ app.use(compression({
 }));
 
 let dresses = [
-  { id: 1, type: 'A-line', rentalDate: '2023-03-20' },
-  { id: 2, type: 'Ball Gown', rentalDate: '2023-04-02' },
-  { id: 3, type: 'Mermaid', rentalDate: '2023-03-25' },
+  { id: 1, type: 'A-line', rentalDate: '2023-03-20', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/dana-aw-edits-31.jpg' },
+  { id: 2, type: 'Ball Gown', rentalDate: '2023-04-02', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/youtube-challenge-38.jpg' },
+  { id: 3, type: 'Mermaid', rentalDate: '2023-03-25', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/AW-Anias-Wedding-Dress-1.jpg' },
+  { id: 4, type: 'Sheath', rentalDate: '2023-02-20', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/4Q0A5114.jpg' },
+  { id: 5, type: 'Column', rentalDate: '2023-02-20', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/aw-giana-wedding-dress.jpg' },
+  { id: 6, type: 'Trumpet', rentalDate: '2023-02-20', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/Londonelopement-98.jpg' },
+  { id: 7, type: 'Empire', rentalDate: '2023-02-20', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/AW-Raphael-Wedding-Dress.jpg' },
+  { id: 8, type: 'Tea-Length', rentalDate: '2023-02-20', picUrl: 'https://www.awbridal.com/wedding-blog/wp-content/uploads/2021/03/Tea-Length-Wedding-Dresses_%E5%89%AF%E6%9C%AC.jpg' },
+
 ];
 
 //change RentalDates to dialy

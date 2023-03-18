@@ -10,14 +10,14 @@ backend จะใช้ express โดยจะมีข้อมูลที่
 3.RentalDate : string
 
 โดยจะมีระบบ crud โดยแบ่งเป็นดังนี้
-create(POST) : http://localhost:3000/dresses
-read(GET) : http://localhost:3000/dresses
-update(PUT) : http://localhost:3000/dresses/:id
-delete(DELETE) : http://localhost:3000/dresses/:id
+create(POST) : http://localhost:8000/dresses
+read(GET) : http://localhost:8000/dresses
+update(PUT) : http://localhost:8000/dresses/:id
+delete(DELETE) : http://localhost:8000/dresses/:id
 
 และมี function เพิ่มเติมเป็น
 
-read by id(GET): http://localhost:3000/dress/:id
-update RentalDate(PUT): http://localhost:3000/dresses/:id/rentaldate
+read by id(GET): http://localhost:8000/dress/:id
+update RentalDate(PUT): http://localhost:8000/dresses/:id/rentaldate
 
 และจะมีการปรับปรุง RentalDate (วันที่จอง) เป็นวันที่ run server โดยอัตโนมัติเพื่อให้ง่ายต่อการจำลองการใช้ server

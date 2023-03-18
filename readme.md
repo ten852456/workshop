@@ -10,10 +10,10 @@ backend จะใช้ express โดยจะมีข้อมูลที่
 3.RentalDate : string\
 \
 โดยจะมีระบบ crud โดยแบ่งเป็นดังนี้\
-create(POST) : http://localhost:8000/dresses\
-read(GET) : http://localhost:8000/dresses\
-update(PUT) : http://localhost:8000/dresses/:id\
-delete(DELETE) : http://localhost:8000/dresses/:id\
+create(POST) : http://localhost:8000/dresses \
+read(GET) : http://localhost:8000/dresses \
+update(PUT) : http://localhost:8000/dresses/:id \
+delete(DELETE) : http://localhost:8000/dresses/:id \
 \
 และมี function เพิ่มเติมเป็น\
 \

@@ -17,7 +17,7 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { SharedService } from './shared.service';
-
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { SharedService } from './shared.service';
     FontAwesomeModule,
     BrowserAnimationsModule
   ],
-  providers: [SharedService],
+  providers: [SharedService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,68 @@
-<p>dress-show works!</p>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeClick();reloadCurrentPage();"></button>
+            </div>
+            <div class="modal-body">
+                <app-dress-add-edit [dress]="dress" *ngIf="ActivateAddEditBook"></app-dress-add-edit>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Searchbox -->
+<div class="d-flex flew-row" style="
+            margin-top: 15px; margin-bottom: 15px; height: 40px;
+            border-radius: 5px;"
+            >
+    <div style="padding-top: 10px; padding-left: 5px">
+        <fa-icon [icon]="faSearch"></fa-icon>
+        หาชุดแต่งงาน
+    </div>
+    <input [(ngModel)]="BookNameFiltered" (keyup)="filterfn() " placeholder=" ใส่ชนิดชุดแต่งงาน"
+        style="width: 90%; margin-left: 20px;">
+</div>
+<div style="text-align:center; padding:20px; font-size:larger"><h1>รายการชุดแต่งงาน
+</h1></div>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addClick()"
+    data-backdrop="static" data-keyboard="false" style="float:right; margin: 10px;">
+    <fa-icon [icon]="faPlusCircle"></fa-icon>
+    &nbsp;เพิ่มชุดแต่งงาน
+</button>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>รูป</th>
+            <th>ชนิดของชุด</th>
+            <th>ค่าเช่า (บาท)</th>
+            <th>เช่าถึง</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of DressViewList">
+            <td><img src="{{dataItem.picUrl}}" style="width:120px;height:142px;"></td>
+            <td>{{dataItem.type}}</td>
+            <td>{{dataItem.price}}</td>
+            <td>{{dataItem.rentalDate}}</td>
+            <td>
+            <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" (click)="editClick(dataItem)" data-backdrop="static"
+                    data-keyboard="false" style="margin: 5px; min-height: 30px; min-width: 30px;">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary mr-1" (click)="deleteClick(dataItem)"
+                    data-backdrop="static" data-keyboard="false" style="margin: 5px; min-height: 30px; min-width: 30px;">
+                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

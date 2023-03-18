@@ -10,46 +10,77 @@
     style="width: 90%; margin-left: 20px;">
 </div>
 
-<!-- bookdata data -->
-<p-dialog header="ข้อมูลชุดแต่งงาน" [(visible)]="displayModal" [modal]="true" [breakpoints]="{'960px': '75vw'}" 
-  [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-  <img src="{{Dress.picUrl}}" class="card-img-top" alt="..." style="min-width:240px; min-height: 240px;max-width:400; max-height: 700px;">
-  <div class="card-body">
-    <h1 class="card-title" style="text-align: center;">{{Dress.type}}</h1>
-    <h2 class="card-text" style="text-align: center;"> ราคา : {{Dress.price}} บาท</h2>
-  </div>
-  <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" label="เช่า" class="p-button-raised p-button-info" (click)="RentDress(Dress)"></button>
-  </ng-template>
-</p-dialog>
 
-<!-- rentbook modal -->
-<p-dialog header="ข้อมูลการเช่า" [(visible)]="displayRentModal" [modal]="true" [breakpoints]="{'960px': '75vw'}"
-  [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-  <img src="{{Dress.picUrl}}" class="card-img-top" style="min-width:240px; min-height: 240px;max-width:600; max-height: 900px;">
-  <div class="card-body">
-    <h1 class="card-title" style="text-align: center;">{{Dress.type}}</h1>
+
+<!-- dressdata data -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" > 
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">ข้อมูลชุดแต่งงาน</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick();reloadCurrentPage();"></button>
+      </div>
+      <div class="modal-body">
+        <img src="{{Dress.picUrl}}" class="card-img-top" alt="..."
+          style="min-width:240px; min-height: 240px;max-width:400; max-height: 700px;">
+        <div class="card-body">
+          <h1 class="card-title" style="text-align: center;">{{Dress.type}}</h1>
+          <h2 class="card-text" style="text-align: center;"> ราคา : {{Dress.price}} บาท</h2>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="canRent" pButton pRipple type="button" label="เช่า" class="p-button-raised p-button-info"data-bs-toggle="modal"
+          data-bs-target="#rentdressModal"
+            (click)="RentDress(Dress)"></button>
+          <h2 *ngIf="!canRent" class="card-text" style="text-align: center; float: left;">ชุดถูกเช่าไปแล้ว</h2>
+        </div>
+      </div>
+    </div>
   </div>
-  <div [style]="{margin: '5px'}">
-    ชื่อผู้เช่า :&nbsp;&nbsp;<input type="text" pInputText [(ngModel)]="RentName"> 
+</div>
+
+
+<!-- rentdress modal -->
+<div class="modal fade" id="rentdressModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" > 
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">ข้อมูลการเช่า</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick();reloadCurrentPage();"></button>
+      </div>
+      <div class="modal-body">
+        <img src="{{Dress.picUrl}}" class="card-img-top"
+        style="min-width:240px; min-height: 240px;max-width:600; max-height: 900px;">
+      <div class="card-body">
+        <h1 class="card-title" style="text-align: center;">{{Dress.type}}</h1>
+      </div>
+      <div [style]="{margin: '5px'}" >
+        ชื่อผู้เช่า :&nbsp;&nbsp;<input type="text" pInputText [(ngModel)]="RentName">
+      </div>
+      <div [style]="{margin: '5px'}">
+        เบอร์โทร : <input type="text" pInputText [(ngModel)]="RentCalNum">
+      </div>
+      <div [style]="{margin: '5px'}">
+        email :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" pInputText [(ngModel)]="RentEmail">
+      </div>
+      <div class="modal-footer">
+        <button pButton pRipple type="button" label="เช่า" class="p-button-raised p-button-info"
+          (click)="SendRentalDress(Dress)"></button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div [style]="{margin: '5px'}">
-    เบอร์โทร : <input type="text" pInputText [(ngModel)]="RentCalNum"> 
-  </div>  
-  <div [style]="{margin: '5px'}">
-    email :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" pInputText [(ngModel)]="RentEmail"> 
-  </div>
-  <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" label="เช่า" class="p-button-raised p-button-info" (click)="SendRentalDress(Dress)"></button>
-  </ng-template>
-</p-dialog>
+</div>
 
 <div style="text-align:center; padding:20px; font-size:large">รายการชุดแต่งงาน</div>
 <!-- card view -->
 <div class="row row-cols-1 row-cols-md-3 g-4" style="z-index:-1">
   <div class="col" *ngFor="let dataItem of DressViewList">
-    <div class="card h-100 border-primary" (click)="ShowData(dataItem)">
-      <img src="{{dataItem.picUrl}}" class="card-img-top" alt="..." style="min-width:240px; min-height: 240px;max-width:600; max-height: 900px;">
+    <div class="card h-100 border-primary" data-bs-toggle="modal"
+    data-bs-target="#exampleModal" (click)="ShowData(dataItem)">
+      <img src="{{dataItem.picUrl}}" class="card-img-top" alt="..."
+        style="min-width:240px; min-height: 240px;max-width:600; max-height: 900px;">
       <div class="card-body">
         <h5 class="card-title" style="text-align: center;">{{dataItem.type}}</h5>
         <p class="card-text" style="text-align: center;"> ราคา : {{dataItem.price}} บาท</p>
@@ -59,4 +90,5 @@
       </div>
     </div>
   </div>
+  <div *ngIf='DressViewList.length === 0'>ไม่มีข้อมูล</div>
 </div>

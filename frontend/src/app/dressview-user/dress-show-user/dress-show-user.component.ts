@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faPlusCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { SharedService } from 'src/app/shared.service';
+import { DatePipe } from '@angular/common';
 
 declare var $: any;
 
@@ -10,14 +11,23 @@ declare var $: any;
   styleUrls: ['./dress-show-user.component.css']
 })
 export class DressShowUserComponent {
+  rentalDate: string;
 
   displayModal: boolean = false;
   displayRentModal: boolean = false;
 
   faPlusCircle = faPlusCircle;
   faSearch = faSearch;
+  item: any;
+  isDateValid: any | undefined;
+  canRent = true;
 
-  constructor(private service:SharedService) { }
+  constructor(private service:SharedService,private datePipe: DatePipe) {
+    const today  = new Date();
+    today.setDate(today.getDate() + 3); // set the date to today + 3 days
+    const formattedDate = this.datePipe.transform(today, 'yyyy-MM-dd');
+    this.rentalDate = formattedDate || ''; // set to empty string if formattedDate is null
+   }
 
   DressViewList:any=[];
 
@@ -39,9 +49,20 @@ export class DressShowUserComponent {
   ngOnInit(): void {
     this.RefreshDressList();
   }
+  closeClick(){
+    this.displayModal=false;
+    this.RefreshDressList;
+  }
+
   SendRentalDress(item:any){
     this.displayRentModal = false;
     this.Dress = item;
+    this.service.updateRentalDate(this.Dress.id, this.rentalDate)
+    .subscribe(
+      dress => console.log('Updated dress:', dress),
+      error => console.error('Error updating dress:', error)
+    );
+    this.reloadCurrentPage();
   }
   RentDress(item:any){
     this.displayModal = false;
@@ -53,9 +74,21 @@ export class DressShowUserComponent {
   }
   ShowData(item:any){
     this.Dress = item;
+    let date = new Date(Date.parse(this.Dress.rentalDate));
+    let today = new Date();
+    if (date > today){
+    this.canRent = false;
+    }
+    else{
+    this.canRent = true;
+    }
     this.displayModal = true;
+    console.log(this.displayModal);
 
   }
+  reloadCurrentPage() {
+    window.location.reload();
+   }
 
   RefreshDressList(){
     this.service.getDresses().subscribe(data=>{
